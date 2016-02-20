@@ -1,0 +1,13 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    babble (1.0.1)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  babble
+
+BUNDLED WITH
+   1.11.2
