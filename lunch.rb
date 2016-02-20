@@ -67,8 +67,6 @@ end
 
 def input
 @input_1 = gets.strip
-total = @cost
-puts total
   if @input_1 == '1'
     main_dish = MainDish.new('Hot Ham Water', 3)
     puts "mmm...#{main_dish.name}($#{main_dish.cost})"
