@@ -95,12 +95,10 @@ def anything_else
   puts
   puts "Anything else? (Y/N)"
   print "> "
-  input_3 = gets.strip
-  if ['y', 'yes'].include?(input_3)
+  @input_anything = gets.strip
+  if ['y', 'yes'].include?(@input_anything)
     check_wallet
-    side_menu
-  elsif ['n', 'no'].include?(input_3)
-    puts_total
+  elsif ['n', 'no'].include?(@input_anything)
     check_wallet
     exit
   elsif input_3 == 'clear'
@@ -110,11 +108,11 @@ end
 
 def remove_item
   puts "Remove last item? (Y/N)"
-  input = gets.strip
-  if ['y', 'yes'].include?(input)
+  @input_remove = gets.strip
+  if ['y', 'yes'].include?(@input_remove)
     @total_arr.pop
     puts_total
-  elsif ['no', 'n'].include?(input)
+  elsif ['no', 'n'].include?(@input_remove)
     puts "Go get more money."
     clear
   else
@@ -149,7 +147,8 @@ end
 # ENDED CODING FOR THE NIGHT WORKING ON @dish.calories.key
 @puts_calories = []
 def dish_calories
-  @puts_calories << @dish.calories.key(@dish.name)
+  @puts_calories << @dish.calories[@dish.name]
+  #@dish.name)
   puts "Calories: #{@puts_calories}"
 end
 
@@ -159,10 +158,15 @@ end
 
 def check_wallet
   if check_total > wallet
-    puts "You don't have enough money."
+    puts "Not enough funds."
     remove_item
-  else
-    "Something borked in check_wallet"
+  elsif check_total < wallet
+    if ['yes', 'y'].include?(@input_anything)
+      side_menu
+    else
+      ['no', 'n'].include?(@input_anything)
+      puts_total
+    end
   end
 end
 
