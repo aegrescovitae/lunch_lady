@@ -22,7 +22,6 @@ class Dish < Food
 end
 
 def main_menu
-  puts
   puts ' -- WELCOME --'
   puts '-- LUNCH MENU --'
   puts "-- WALLET: $!0 --"
@@ -36,7 +35,6 @@ def main_menu
 end
 
 def side_menu
-  puts
   puts "Please choose a side:"
   puts "1: Peas ($.99)"
   puts "2: Yellowish stuff ($1.50)"
@@ -94,7 +92,6 @@ def input_2
 end
 
 def anything_else
-  puts
   puts "Anything else? (Y/N)"
   print "> "
   @input_anything = gets.strip
@@ -151,7 +148,6 @@ end
 
 def puts_total
   repeat_your_order
-  puts
   @puts_total = puts "Total: $#{check_total}, Wallet: $#{change}"
   puts_calories
 end
@@ -172,9 +168,11 @@ def dish_calories
 end
 
 def puts_calories
-  @puts_calories = @calories.inject(0){|sum,x| sum + x }
-  puts "Calories: #{@puts_calories}"
+  puts_calories = @calories.inject(0){|sum,x| sum + x }
+  puts "Calories: #{puts_calories}"
 end
+
+# THIS ONLY WORKS ON MY LOCAL MACHINE!!
 
 def clear
   system("ruby ~/Documents/DPL/week01/day5/lunch_lady/lunch.rb")
