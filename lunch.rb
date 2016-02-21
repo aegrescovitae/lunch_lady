@@ -1,7 +1,5 @@
 # Lunch Lady Land
 require 'pry'
-require 'babbler'
-@babble = Babbler.babble
 
 class Food
   attr_accessor :name, :cost
@@ -17,7 +15,7 @@ class Dish < Food
   end
 
   def calories
-    @calories = {'hot_ham_water' => 40, 'cold_soup' => 50, 'surprise_me' => 400, 'peas' => 20, 'yellowish_stuff' => 650, 'babble' => 2}
+    @calories = {'Hot Ham Water' => 40, 'Cold Soup' => 50, 'Surprise Me' => 400, 'Peas' => 20, 'Yellowish Stuff' => 650, 'Tuna Salad' => 2}
   end
 end
 
@@ -30,7 +28,7 @@ def main_menu
   puts 'Please choose a main dish:'
   puts '1: Hot Ham Water ($3.45)'
   puts '2: Cold soup ($4.32)'
-  puts "3: #{@babble} ($5.87)"
+  puts "3: Tuna Salad ($5.87)"
   print "> "
   input_1
 end
@@ -48,14 +46,14 @@ end
 def input_1
 input_1 = gets.strip
   if input_1 == '1'
-    @dish = Dish.new('hot_ham_water', 3.45)
+    @dish = Dish.new('Hot Ham Water', 3.45)
     puts "mmm...#{@dish.name}($#{@dish.cost})"
   elsif input_1 == '2'
-    @dish = Dish.new('cold_soup', 4.32)
+    @dish = Dish.new('Cold Soup', 4.32)
     puts "Right...#{@dish.name}($#{@dish.cost})"
   elsif input_1 == '3'
-    @dish = Dish.new('babble', 5.87)
-    puts "Hmm. #{@babble}, okay! ($#{@dish.cost})"
+    @dish = Dish.new('Tuna Salad', 5.87)
+    puts "Hmm. #{@dish.name}, okay! ($#{@dish.cost})"
   elsif input_1 == 'clear'
     clear
   elsif input_1 == 'exit'
@@ -64,6 +62,7 @@ input_1 = gets.strip
     puts "Please Select a valid option!"
     clear
   end
+  add_name_to_order
   dish_calories
   add_to_total
   side_menu
@@ -72,13 +71,13 @@ end
 def input_2
   input_2 = gets.strip
   if input_2 == '1'
-    @dish = Dish.new('peas', 0.99)
+    @dish = Dish.new('Peas', 0.99)
     puts "#{@dish.name}, you sure? Okay...($#{@dish.cost})"
   elsif input_2 == '2'
-    @dish = Dish.new('yellowish_stuff', 1.5)
+    @dish = Dish.new('Yellowish Stuff', 1.5)
     puts "Great choice. I love the #{@dish.name} ($#{@dish.cost})"
   elsif input_2 == '3'
-    @dish = Dish.new('surprise_me', 2.12)
+    @dish = Dish.new('Surprise Me', 2.12)
     puts "#{@dish.name}? Let me check the back ($#{@dish.cost})"
   elsif input_2 == 'clear'
     clear
@@ -88,6 +87,7 @@ def input_2
     puts "Please Select a valid option!"
     clear
   end
+  add_name_to_order
   dish_calories
   add_to_total
   anything_else
@@ -126,6 +126,18 @@ def remove_item
   end
 end
 
+@name_to_order = []
+def add_name_to_order
+  @name_to_order << @dish.name
+end
+
+def repeat_your_order
+  @name_to_order.each do |list_names|
+    puts "#{list_names}. "
+
+  end
+end
+
 def wallet
   @wallet = 10.0
 end
@@ -135,12 +147,14 @@ def check_total
 end
 
 def puts_total
+  repeat_your_order
   @puts_total = puts "Total: $#{check_total}, Change: $#{change}"
   dish_calories
 end
 
 def change
   @change = wallet - check_total
+  @change.round(2)
 end
 
 @total_arr = []
@@ -149,7 +163,6 @@ def add_to_total
   @total_arr << @dish.cost.to_f
 end
 
-# ENDED CODING FOR THE NIGHT WORKING ON @dish.calories.key
 @puts_calories = []
 def dish_calories
   @puts_calories << @dish.calories[@dish.name]
