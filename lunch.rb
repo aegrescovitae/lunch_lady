@@ -15,7 +15,9 @@ class Dish < Food
   end
 
   def calories
-    @calories = {'Hot Ham Water' => 40, 'Cold Soup' => 50, 'Aubrey Surprise' => 400, 'Peas' => 20, 'Yellowish Stuff' => 650, 'Tuna Salad' => 2}
+    @calories = {'Hot Ham Water' => 40, 'Cold Soup' => 50,
+                  'Aubrey Surprise' => 400, 'Peas' => 20,
+                  'Yellowish Stuff'=> 650, 'Tuna Salad' => 2}
   end
 end
 
@@ -151,7 +153,7 @@ def puts_total
   repeat_your_order
   puts
   @puts_total = puts "Total: $#{check_total}, Wallet: $#{change}"
-  dish_calories
+  puts_calories
 end
 
 def change
@@ -164,11 +166,14 @@ def add_to_total
   @total_arr << @dish.cost.to_f
 end
 
-@puts_calories = []
+@calories = []
 def dish_calories
-  @puts_calories << @dish.calories[@dish.name]
-  puts_calories = @puts_calories.inject(0){|sum,x| sum + x }
-  puts "Calories: #{puts_calories}"
+  @calories << @dish.calories[@dish.name]
+end
+
+def puts_calories
+  @puts_calories = @calories.inject(0){|sum,x| sum + x }
+  puts "Calories: #{@puts_calories}"
 end
 
 def clear
