@@ -21,8 +21,6 @@ class Dish < Food
   end
 end
 
-
-
 def main_menu
   puts
   puts ' -- WELCOME --'
@@ -99,13 +97,8 @@ def anything_else
   print "> "
   input_3 = gets.strip
   if ['y', 'yes'].include?(input_3)
-    if check_total > wallet
-      puts "You don't have enough money."
-      puts "Total: $#{check_total}"
-      remove_item
-    else
-      side_menu
-    end
+    check_wallet
+    side_menu
   elsif ['n', 'no'].include?(input_3)
     puts_total
     check_wallet
@@ -131,17 +124,16 @@ def remove_item
 end
 
 def wallet
-  @wallet = 10
+  @wallet = 10.0
 end
 
 def check_total
   @check_total = @total_arr.inject(0){|sum,x| sum + x }
-  @check_total.round(2)
 end
 
 def puts_total
   @puts_total = puts "Total: $#{check_total}, Change: $#{change}"
-  puts_calories
+  dish_calories
 end
 
 def change
@@ -156,7 +148,7 @@ end
 
 # ENDED CODING FOR THE NIGHT WORKING ON @dish.calories.key
 @puts_calories = []
-def puts_calories
+def dish_calories
   @puts_calories << @dish.calories.key(@dish.name)
   puts "Calories: #{@puts_calories}"
 end
@@ -169,8 +161,9 @@ def check_wallet
   if check_total > wallet
     puts "You don't have enough money."
     remove_item
+  else
+    "Something borked in check_wallet"
   end
 end
-
 
 main_menu
