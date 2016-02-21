@@ -17,7 +17,7 @@ class Dish < Food
   end
 
   def calories
-    calories = {hot_ham_water: 40, cold_soup: 50, surprise_me: 400, peas: 20, yellowish_stuff: 650, babble: 2}
+    @calories = {'hot_ham_water' => 40, 'cold_soup' => 50, 'surprise_me' => 400, 'peas' => 20, 'yellowish_stuff' => 650, 'babble' => 2}
   end
 end
 
@@ -73,7 +73,7 @@ end
 def input_2
   input_2 = gets.strip
   if input_2 == '1'
-    @dish = Dish.new('Peas', 0.99)
+    @dish = Dish.new('peas', 0.99)
     puts "#{@dish.name}, you sure? Okay...($#{@dish.cost})"
   elsif input_2 == '2'
     @dish = Dish.new('yellowish_stuff', 1.5)
@@ -136,10 +136,12 @@ end
 
 def check_total
   @check_total = @total_arr.inject(0){|sum,x| sum + x }
+  @check_total.round(2)
 end
 
 def puts_total
   @puts_total = puts "Total: $#{check_total}, Change: $#{change}"
+  puts_calories
 end
 
 def change
@@ -150,6 +152,13 @@ end
 
 def total
   @total_arr << @dish.cost.to_f
+end
+
+# ENDED CODING FOR THE NIGHT WORKING ON @dish.calories.key
+@puts_calories = []
+def puts_calories
+  @puts_calories << @dish.calories.key(@dish.name)
+  puts "Calories: #{@puts_calories}"
 end
 
 def clear
