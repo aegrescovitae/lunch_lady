@@ -129,8 +129,7 @@ end
 
 def repeat_your_order
   @name_to_order.each do |list_names|
-    puts "#{list_names}. "
-
+    print "#{list_names}. "
   end
 end
 
@@ -145,6 +144,7 @@ end
 
 def puts_total
   repeat_your_order
+  puts
   @puts_total = puts "Total: $#{check_total}, Change: $#{change}"
   dish_calories
 end
