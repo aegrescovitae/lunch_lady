@@ -101,6 +101,8 @@ def anything_else
     exit
   elsif @input_anything == 'clear'
     clear
+  elsif @input_anything == 'exit'
+    exit
   else
     puts "Enter a valid option!"
     clear
@@ -155,7 +157,6 @@ def change
 end
 
 @total_arr = []
-
 def add_to_total
   @total_arr << @dish.cost.to_f
 end
