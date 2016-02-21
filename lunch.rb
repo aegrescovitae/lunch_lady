@@ -64,7 +64,8 @@ input_1 = gets.strip
     puts "Please Select a valid option!"
     clear
   end
-  total
+  dish_calories
+  add_to_total
   side_menu
 end
 
@@ -87,7 +88,8 @@ def input_2
     puts "Please Select a valid option!"
     clear
   end
-  total
+  dish_calories
+  add_to_total
   anything_else
 end
 
@@ -101,7 +103,10 @@ def anything_else
   elsif ['n', 'no'].include?(@input_anything)
     check_wallet
     exit
-  elsif input_3 == 'clear'
+  elsif @input_anything == 'clear'
+    clear
+  else
+    puts "Enter a valid option!"
     clear
   end
 end
@@ -140,7 +145,7 @@ end
 
 @total_arr = []
 
-def total
+def add_to_total
   @total_arr << @dish.cost.to_f
 end
 
@@ -148,8 +153,8 @@ end
 @puts_calories = []
 def dish_calories
   @puts_calories << @dish.calories[@dish.name]
-  #@dish.name)
-  puts "Calories: #{@puts_calories}"
+  puts_calories = @puts_calories.inject(0){|sum,x| sum + x }
+  puts "Calories: #{puts_calories}"
 end
 
 def clear
