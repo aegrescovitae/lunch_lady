@@ -144,6 +144,7 @@ end
 
 def check_total
   @check_total = @total_arr.inject(0){|sum,x| sum + x }
+  @check_total.round(2)
 end
 
 def puts_total
