@@ -62,9 +62,7 @@ input_1 = gets.strip
     puts "Please Select a valid option!"
     clear
   end
-  add_name_to_order
-  dish_calories
-  add_to_total
+  order_checks
   side_menu
 end
 
@@ -87,9 +85,7 @@ def input_2
     puts "Please Select a valid option!"
     clear
   end
-  add_name_to_order
-  dish_calories
-  add_to_total
+  order_checks
   anything_else
 end
 
@@ -187,6 +183,12 @@ def check_wallet
       puts_total
     end
   end
+end
+
+def order_checks
+  add_name_to_order
+  dish_calories
+  add_to_total
 end
 
 main_menu
