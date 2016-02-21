@@ -15,7 +15,7 @@ class Dish < Food
   end
 
   def calories
-    @calories = {'Hot Ham Water' => 40, 'Cold Soup' => 50, 'Surprise Me' => 400, 'Peas' => 20, 'Yellowish Stuff' => 650, 'Tuna Salad' => 2}
+    @calories = {'Hot Ham Water' => 40, 'Cold Soup' => 50, 'Aubrey Surprise' => 400, 'Peas' => 20, 'Yellowish Stuff' => 650, 'Tuna Salad' => 2}
   end
 end
 
@@ -38,22 +38,22 @@ def side_menu
   puts "Please choose a side:"
   puts "1: Peas ($.99)"
   puts "2: Yellowish stuff ($1.50)"
-  puts "3: Surprise me ($2.12)"
+  puts "3: Aubrey Surprise ($2.12)"
   print "> "
   input_2
 end
 
 def input_1
-input_1 = gets.strip
+input_1 = gets.strip.downcase
   if input_1 == '1'
     @dish = Dish.new('Hot Ham Water', 3.45)
-    puts "mmm...#{@dish.name}($#{@dish.cost})"
+    puts "mmm...#{@dish.name}."
   elsif input_1 == '2'
     @dish = Dish.new('Cold Soup', 4.32)
-    puts "Right...#{@dish.name}($#{@dish.cost})"
+    puts "Right...#{@dish.name}."
   elsif input_1 == '3'
     @dish = Dish.new('Tuna Salad', 5.87)
-    puts "Hmm. #{@dish.name}, okay! ($#{@dish.cost})"
+    puts "Hmm. #{@dish.name}, okay!"
   elsif input_1 == 'clear'
     clear
   elsif input_1 == 'exit'
@@ -63,20 +63,21 @@ input_1 = gets.strip
     clear
   end
   order_checks
+  puts_total
   side_menu
 end
 
 def input_2
-  input_2 = gets.strip
+  input_2 = gets.strip.downcase
   if input_2 == '1'
     @dish = Dish.new('Peas', 0.99)
-    puts "#{@dish.name}, you sure? Okay...($#{@dish.cost})"
+    puts "#{@dish.name}, you sure? Okay..."
   elsif input_2 == '2'
     @dish = Dish.new('Yellowish Stuff', 1.5)
-    puts "Great choice. I love the #{@dish.name} ($#{@dish.cost})"
+    puts "Great choice. I love the #{@dish.name}."
   elsif input_2 == '3'
-    @dish = Dish.new('Surprise Me', 2.12)
-    puts "#{@dish.name}? Let me check the back ($#{@dish.cost})"
+    @dish = Dish.new('Aubrey Surprise', 2.12)
+    puts "#{@dish.name}? Let me check the back."
   elsif input_2 == 'clear'
     clear
   elsif input_2 == 'exit'
@@ -86,6 +87,7 @@ def input_2
     clear
   end
   order_checks
+  puts_total
   anything_else
 end
 
@@ -97,7 +99,7 @@ def anything_else
   if ['y', 'yes'].include?(@input_anything)
     check_wallet
   elsif ['n', 'no'].include?(@input_anything)
-    check_wallet
+    puts_total
     exit
   elsif @input_anything == 'clear'
     clear
@@ -130,6 +132,7 @@ def add_name_to_order
 end
 
 def repeat_your_order
+  print "Order Details: "
   @name_to_order.each do |list_names|
     print "#{list_names}. "
   end
@@ -147,7 +150,7 @@ end
 def puts_total
   repeat_your_order
   puts
-  @puts_total = puts "Total: $#{check_total}, Change: $#{change}"
+  @puts_total = puts "Total: $#{check_total}, Wallet: $#{change}"
   dish_calories
 end
 
@@ -175,6 +178,7 @@ end
 def check_wallet
   if check_total > wallet
     puts "Not enough funds."
+    puts_total
     remove_item
   elsif check_total < wallet
     if ['yes', 'y'].include?(@input_anything)
