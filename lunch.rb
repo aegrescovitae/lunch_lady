@@ -25,13 +25,12 @@ def main_menu
   puts ' -- WELCOME --'
   puts '-- LUNCH MENU --'
   puts "-- WALLET: $!0 --"
-  puts
   puts 'Please choose a main dish:'
   puts '1: Hot Ham Water ($3.45)'
   puts '2: Cold soup ($4.32)'
   puts "3: Tuna Salad ($5.87)"
   print "> "
-  input_1
+  input_main
 end
 
 def side_menu
@@ -40,23 +39,23 @@ def side_menu
   puts "2: Yellowish stuff ($1.50)"
   puts "3: Aubrey Surprise ($2.12)"
   print "> "
-  input_2
+  input_side
 end
 
-def input_1
-input_1 = gets.strip.downcase
-  if input_1 == '1'
+def input_main
+input_main = gets.strip.downcase
+  if input_main == '1'
     @dish = Dish.new('Hot Ham Water', 3.45)
     puts "mmm...#{@dish.name}."
-  elsif input_1 == '2'
+  elsif input_main == '2'
     @dish = Dish.new('Cold Soup', 4.32)
     puts "Right...#{@dish.name}."
-  elsif input_1 == '3'
+  elsif input_main == '3'
     @dish = Dish.new('Tuna Salad', 5.87)
     puts "Hmm. #{@dish.name}, okay!"
-  elsif input_1 == 'clear'
+  elsif input_main == 'clear'
     clear
-  elsif input_1 == 'exit'
+  elsif input_main == 'exit'
     exit
   else
     puts "Please Select a valid option!"
@@ -67,20 +66,20 @@ input_1 = gets.strip.downcase
   side_menu
 end
 
-def input_2
-  input_2 = gets.strip.downcase
-  if input_2 == '1'
+def input_side
+  input_side = gets.strip.downcase
+  if input_side == '1'
     @dish = Dish.new('Peas', 0.99)
     puts "#{@dish.name}, you sure? Okay..."
-  elsif input_2 == '2'
+  elsif input_side == '2'
     @dish = Dish.new('Yellowish Stuff', 1.5)
     puts "Great choice. I love the #{@dish.name}."
-  elsif input_2 == '3'
+  elsif input_side == '3'
     @dish = Dish.new('Aubrey Surprise', 2.12)
     puts "#{@dish.name}? Let me check the back."
-  elsif input_2 == 'clear'
+  elsif input_side == 'clear'
     clear
-  elsif input_2 == 'exit'
+  elsif input_main == 'exit'
     exit
   else
     puts "Please Select a valid option!"
